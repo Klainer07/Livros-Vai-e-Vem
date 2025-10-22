@@ -1,0 +1,86 @@
+### ============================
+### LOGIN
+### ============================
+POST http://127.0.0.1:8000/api/login
+Content-Type: application/json
+
+{
+  "email": "klein@gmail.com",
+  "password": "12345678"
+}
+
+### ============================
+### USUÁRIO AUTENTICADO (me)
+### ============================
+GET http://127.0.0.1:8000/api/me
+Authorization: Bearer 1|HSMHdwiTMEH1W3tboKZVieJCnrYADvSdpxU9tPlL7573f320
+
+### ============================
+### LISTAR TODOS OS USUÁRIOS
+### ============================
+GET http://127.0.0.1:8000/api/users
+Authorization: Bearer 1|HSMHdwiTMEH1W3tboKZVieJCnrYADvSdpxU9tPlL7573f320
+
+### ============================
+### CRIAR NOVO USUÁRIO
+### ============================
+POST http://127.0.0.1:8000/api/users
+Content-Type: application/json
+Authorization: Bearer 1|HSMHdwiTMEH1W3tboKZVieJCnrYADvSdpxU9tPlL7573f320
+
+{
+  "name": "Teste User",
+  "username": "testeuser",
+  "email": "testeuser@example.com",
+  "password": "12345678",
+  "avatar": null,
+  "bio": "Usuário de teste"
+}
+
+### ============================
+### MOSTRAR DETALHES DO USUÁRIO (id=7)
+### ============================
+GET http://127.0.0.1:8000/api/users/7
+Authorization: Bearer 1|HSMHdwiTMEH1W3tboKZVieJCnrYADvSdpxU9tPlL7573f320
+
+### ============================
+### ATUALIZAR USUÁRIO (id=7)
+### ============================
+PUT http://127.0.0.1:8000/api/users/7
+Content-Type: application/json
+Authorization: Bearer 1|HSMHdwiTMEH1W3tboKZVieJCnrYADvSdpxU9tPlL7573f320
+
+{
+  "name": "Teste User Atualizado",
+  "bio": "Bio atualizada"
+}
+
+### ============================
+### DELETAR USUÁRIO (id=7)
+### ============================
+DELETE http://127.0.0.1:8000/api/users/7
+Authorization: Bearer 1|HSMHdwiTMEH1W3tboKZVieJCnrYADvSdpxU9tPlL7573f320
+
+### ============================
+### ATUALIZAR USUÁRIO (id=7)
+### ============================
+POST http://127.0.0.1:8000/api/books
+Authorization: Bearer 2|gzRNJvQgYN5hD7bH4ETWrWbZuioONJNmSAsyPJyR2788d81b
+Content-Type: application/json
+
+{
+  "title": "O Senhor dos Anéis",
+  "author": "J.R.R. Tolkien",
+  "genre": "Fantasia",
+  "condition": "Novo",
+  "cover_image": "caminho/para/imagem.jpg",
+  "status": "disponível",
+  "location": "Estante principal",
+  "user_id": 6
+}
+
+
+###
+
+GET http://127.0.0.1:8000/api/books
+Authorization: Bearer 1|HSMHdwiTMEH1W3tboKZVieJCnrYADvSdpxU9tPlL7573f320
