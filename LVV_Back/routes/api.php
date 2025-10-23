@@ -7,19 +7,10 @@ use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\Api\RatingController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Aqui você registra as rotas da sua API. Elas são carregadas pelo
-| RouteServiceProvider e todas são automaticamente prefixadas com "api/".
-|
-*/
+// FICAR ATENTO PARA PROTEGER ALGUMAS ROTAS
 
-// ======================
-// ROTAS DE USUÁRIOS
-// ======================
+
+
 Route::prefix('users')->group(function () {
     Route::get('/', [UserController::class, 'index']);          // Listar todos os usuários
     Route::post('/', [UserController::class, 'store']);         // Criar novo usuário
@@ -28,19 +19,15 @@ Route::prefix('users')->group(function () {
     Route::delete('/{id}', [UserController::class, 'destroy']); // Deletar um usuário
 });
 
-// ======================
-// ROTAS DE AUTENTICAÇÃO
-// ======================
+
 Route::post('/login', [UserController::class, 'login']); // Login (gera token)
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/logout', [UserController::class, 'logout']); // Logout (revoga token)
+    Route::post('/logout', [UserController::class, 'logout']); // Logout (desgera token)
     Route::get('/me', [UserController::class, 'me']);          // Retorna o usuário logado
 });
 
-// ======================
-// ROTAS DE LIVROS
-// ======================
+
 Route::prefix('books')->group(function () {
     Route::get('/', [BookController::class, 'index']);          // Listar todos os livros
     Route::post('/', [BookController::class, 'store']);         // Criar novo livro
@@ -58,7 +45,7 @@ Route::prefix('transactions')->group(function () {
     Route::delete('/{id}', [TransactionController::class, 'destroy']); // Deletar
 });
 
-// Rotas CRUD de Ratings (avaliações)
+
 Route::prefix('ratings')->group(function () {
     Route::get('/', [RatingController::class, 'index']);      // Listar todas as avaliações
     Route::post('/', [RatingController::class, 'store']);     // Criar avaliação

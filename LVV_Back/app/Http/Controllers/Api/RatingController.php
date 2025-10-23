@@ -8,8 +8,6 @@ use App\Models\Rating;
 
 class RatingController extends Controller
 {
-    // ===================== CRUD =====================
-
     // Listar todas as avaliações
     public function index()
     {

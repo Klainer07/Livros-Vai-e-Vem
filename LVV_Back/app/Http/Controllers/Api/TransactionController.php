@@ -10,14 +10,14 @@ use Illuminate\Validation\Rule;
 
 class TransactionController extends Controller
 {
-    // ===================== LISTAR TODAS =====================
+ 
     public function index()
     {
         $transactions = Transaction::with(['book', 'sender', 'receiver'])->get();
         return response()->json($transactions, 200);
     }
 
-    // ===================== CRIAR =====================
+   
     public function store(Request $request)
     {
         $request->validate([
@@ -54,7 +54,7 @@ class TransactionController extends Controller
         return response()->json($transaction, 201);
     }
 
-    // ===================== MOSTRAR DETALHE =====================
+    
     public function show($id)
     {
         $transaction = Transaction::with(['book', 'sender', 'receiver'])->find($id);
@@ -64,7 +64,7 @@ class TransactionController extends Controller
         return response()->json($transaction, 200);
     }
 
-    // ===================== ATUALIZAR =====================
+
     public function update(Request $request, $id)
     {
         $transaction = Transaction::find($id);
@@ -95,7 +95,7 @@ class TransactionController extends Controller
         return response()->json($transaction, 200);
     }
 
-    // ===================== DELETAR =====================
+    
     public function destroy($id)
     {
         $transaction = Transaction::find($id);

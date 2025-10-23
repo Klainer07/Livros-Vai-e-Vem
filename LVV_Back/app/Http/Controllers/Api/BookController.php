@@ -9,12 +9,11 @@ use Illuminate\Validation\Rule;
 
 class BookController extends Controller
 {
-    // ===================== CRUD =====================
 
     // Listar todos os livros
     public function index()
     {
-        $books = Book::with('user')->get(); // inclui dono do livro
+        $books = Book::with('user')->get(); 
         return response()->json($books, 200);
     }
 

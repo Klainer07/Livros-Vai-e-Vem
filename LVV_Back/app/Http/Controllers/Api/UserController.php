@@ -10,7 +10,6 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-    // ===================== CRUD =====================
 
     // Listar todos os usuários
     public function index()
@@ -98,7 +97,6 @@ class UserController extends Controller
         return response()->json(['message' => 'Usuário deletado com sucesso'], 200);
     }
 
-    // ===================== AUTH (Sanctum) =====================
 
     // Login do usuário (gera token)
     public function login(Request $request)
