@@ -28,7 +28,7 @@ export default function AddBookForm({ onBookAdded }) {
       });
 
       alert('Livro cadastrado com sucesso!');
-      onBookAdded(response.data); // opcional: atualizar lista na HomePage
+      onBookAdded(response.data); 
       setTitle('');
       setAuthor('');
       setGenre('');

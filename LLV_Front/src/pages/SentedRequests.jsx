@@ -42,7 +42,7 @@ export default function SentedRequests({ user }) {
   return (
     <div className="home-page">
       <header>
-        <h2>Pedidos enviados de empréstimo</h2>
+        <h2>Pedidos de Empréstimos Enviados</h2>
         <button onClick={() => navigate('/home')}>Voltar</button>
       </header>
 
