@@ -12,6 +12,7 @@ export default function HomePage({ user: loggedUser }) {
   const [activeTab, setActiveTab] = useState('available');
   const [search, setSearch] = useState(''); 
 
+  
   useEffect(() => {
     const token = localStorage.getItem('token');
     const userData = loggedUser || JSON.parse(localStorage.getItem('user'));
@@ -135,7 +136,12 @@ export default function HomePage({ user: loggedUser }) {
                 {book.location && <p>Local: {book.location}</p>}
                 <p>Dono: {book.user.name}</p>
                 {activeTab === 'mine' && (
+                <>
                   <p>Status: {book.status === 'disponível' ? 'Disponível' : 'Emprestado'}</p>
+                  <button onClick={() => navigate(`/edit-book/${book.id}`)}>
+                    Editar Livro
+                  </button>
+                </>
                 )}
                 {activeTab === 'available' && (
                   <button onClick={() => handleBorrow(book)}>Pegar emprestado</button>

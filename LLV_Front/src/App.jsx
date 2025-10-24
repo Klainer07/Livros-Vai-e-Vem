@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import AddBookPage from './pages/AddBookPage';
 import ReceivedRequests from './pages/ReceivedRequests';
 import SentedRequests from './pages/SentedRequests';
+import EditBookPage from './pages/EditBookPage.jsx';
 import { useState, useEffect } from 'react';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/add-book" element={<AddBookPage user={user} />} />
         <Route path="/requests" element={<ReceivedRequests user={user} />} />
         <Route path="/sented-requests" element={<SentedRequests user={user} />} />
+        <Route path="/edit-book/:id" element={<EditBookPage />} />
       </Routes>
     </Router>
   );
