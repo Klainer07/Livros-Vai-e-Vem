@@ -1,68 +1,87 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --primary-purple: #6b34f5;
+  --primary-teal: #6ef2a5;
+  --primary-orange: #ff7f00;
+  --background-dark: #1e0f33;
+  --text-light: #ffffff;
+  --text-dark: #1a0033;
+
+  font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  color-scheme: dark;
+  color: var(--text-light);
+  background-color: var(--background-dark);
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  padding: 0;
   min-width: 320px;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: inherit;
+  background-color: var(--background-dark);
+  color: var(--text-light);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+h1, h2, h3 {
+  margin: 0;
+  font-weight: 600;
+  color: var(--primary-purple);
+}
+
+a {
+  font-weight: 500;
+  color: var(--primary-teal);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+a:hover {
+  color: var(--primary-orange);
 }
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: none;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--primary-teal);
+  color: var(--text-dark);
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: all 0.25s ease-in-out;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+button:hover {
+  background-color: var(--primary-orange);
+  color: var(--text-light);
+  transform: translateY(-1px);
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #3c2a62;
+  background-color: #2f1d50;
+  color: var(--text-light);
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary-teal);
+}
+
+::placeholder {
+  color: #a883ff;
+}
+
+p, span {
+  color: var(--text-light);
 }

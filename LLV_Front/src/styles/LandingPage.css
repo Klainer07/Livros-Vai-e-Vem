@@ -1,3 +1,27 @@
+:root {
+  --color-bg: #1e0f33;
+  --color-card: #281947;
+  --color-input: #2f1d50;
+  --color-purple: #bda4e3;
+  --color-teal: #6ef2a5;
+  --color-orange: #ff7f00;
+  --color-white: #ffffff;
+  --color-error: #ff5c5c;
+  --color-success: #4caf50;
+
+  --font-family: 'Poppins', sans-serif;
+  --radius: 8px;
+  --card-radius: 16px;
+  --transition-fast: 0.25s ease-in-out;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  color: var(--color-white);
+}
+
 .landing-page {
   height: 100vh;
   width: 100vw;
@@ -5,38 +29,30 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #1e0f33; 
-  font-family: 'Poppins', sans-serif;
-  color: #fff;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  background-color: var(--color-bg);
   text-align: center;
+  box-sizing: border-box;
 }
-
 
 .landing-page h1 {
   font-size: 2.2rem;
   margin-bottom: 2rem;
-  color: #bda4e3;
+  color: var(--color-purple);
   font-weight: 600;
 }
 
-
 .forms-container {
-  background-color: #281947;
+  background-color: var(--color-card);
   padding: 2.5rem;
-  border-radius: 16px;
+  border-radius: var(--card-radius);
   width: 90%;
   max-width: 420px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.2rem;
-  box-shadow: 0 0 25px rgba(110, 242, 165, 0.15);
   animation: fadeIn 0.4s ease-in-out;
 }
-
 
 @keyframes fadeIn {
   from {
@@ -49,19 +65,18 @@
   }
 }
 
-
 .forms-container input,
 .forms-container textarea {
   width: 100%;
   padding: 0.9rem;
-  border-radius: 8px;
+  border-radius: var(--radius);
   border: 1px solid #3c2a62;
-  background-color: #2f1d50;
-  color: #fff;
+  background-color: var(--color-input);
+  color: var(--color-white);
   font-size: 1rem;
   outline: none;
-  transition: border-color 0.2s ease-in-out;
   box-sizing: border-box;
+  transition: border-color 0.2s ease-in-out;
 }
 
 .forms-container textarea {
@@ -71,40 +86,37 @@
 
 .forms-container input:focus,
 .forms-container textarea:focus {
-  border-color: #6ef2a5;
+  border-color: var(--color-teal);
 }
-
 
 .forms-container input::placeholder,
 .forms-container textarea::placeholder {
-  color: #a883ff;
+  color: var(--color-purple);
 }
-
 
 .forms-container button {
   width: 100%;
-  background-color: #6ef2a5;
+  background-color: var(--color-teal);
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius);
   padding: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  color: #1a0033;
-  transition: all 0.25s ease-in-out;
+  color: var(--color-dark);
+  transition: var(--transition-fast);
 }
 
 .forms-container button:hover {
-  background-color: #ff7f00;
-  color: #fff;
+  background-color: var(--color-orange);
+  color: var(--color-white);
   transform: translateY(-2px);
 }
-
 
 .landing-page > button {
   margin-top: 2rem;
   background: none;
   border: none;
-  color: #6ef2a5;
+  color: var(--color-teal);
   font-weight: 500;
   cursor: pointer;
   font-size: 1rem;
@@ -112,9 +124,9 @@
 }
 
 .landing-page > button:hover {
-  color: #ff7f00;
+  color: var(--color-orange);
+  background: none;
 }
-
 
 .forms-container p,
 .error,
@@ -125,13 +137,12 @@
 }
 
 .error {
-  color: #ff5c5c;
+  color: var(--color-error);
 }
 
 .success {
-  color: #4caf50;
+  color: var(--color-success);
 }
-
 
 .register-form {
   width: 100%;

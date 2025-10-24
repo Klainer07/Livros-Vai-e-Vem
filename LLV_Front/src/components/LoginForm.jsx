@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import api from '../services/api';
+import '../styles/LandingPage.css'; 
 
 export default function LoginForm({ onLogin }) {
   const [email, setEmail] = useState('');
@@ -12,11 +13,9 @@ export default function LoginForm({ onLogin }) {
       const response = await api.post('/login', { email, password });
       const { access_token, user } = response.data;
 
-      
       localStorage.setItem('token', access_token);
       localStorage.setItem('user', JSON.stringify(user));
 
-      
       onLogin(user);
     } catch (err) {
       setError('Email ou senha inválidos.');
@@ -25,9 +24,9 @@ export default function LoginForm({ onLogin }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="auth-form" onSubmit={handleSubmit}>
       <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p className="error-text">{error}</p>}
       <input
         type="email"
         placeholder="Email"

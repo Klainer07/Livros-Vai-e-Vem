@@ -2,29 +2,28 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background-color: #2b0a3d;
+  background-color: #281947;
   padding: 30px;
   border-radius: 16px;
-  width: 100%; 
-  max-width: 360px; 
-  box-shadow: 0 0 20px rgba(145, 70, 255, 0.4);
+  width: 100%;
+  max-width: 360px;
   color: #fff;
 }
 
 .register-form h2 {
   text-align: center;
-  color: #ff9f00;
+  color: #bda4e3;
 }
 
 .register-form input,
 .register-form textarea {
   padding: 10px;
-  border: none;
+  border: 1px solid #3c2a62;
   border-radius: 8px;
   outline: none;
   font-size: 14px;
-  background-color: #3e1158;
-  color: white;
+  background-color: #2f1d50;
+  color: #fff;
 }
 
 .register-form textarea {
@@ -38,19 +37,19 @@
 }
 
 .register-form button {
-  background-color: #4caf50;
+  background-color: #6ef2a5;
   border: none;
-  color: white;
+  color: #1a0033;
   padding: 10px;
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background-color 0.25s ease;
 }
 
 .register-form button:hover {
-  background-color: #ff9f00;
-  transform: scale(1.03);
+  background-color: #ff7f00;
+  color: #fff;
 }
 
 .error {

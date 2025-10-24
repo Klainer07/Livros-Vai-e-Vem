@@ -13,7 +13,6 @@ export default function SentedRequests({ user }) {
 
     api.get('/transactions')
       .then(res => {
-        // Filtra receiver em vez de sender, talvez refatorar api e model
         const sent = res.data.filter(tr => tr.receiver?.id === user.id);
         setRequests(sent);
       })
@@ -21,17 +20,19 @@ export default function SentedRequests({ user }) {
       .finally(() => setLoading(false));
   }, [user]);
 
-  const handleUpdateStatus = async (transactionId, newStatus) => {
-    try {
-      await api.put(`/transactions/${transactionId}`, { status: newStatus });
-      setRequests(prev =>
-        prev.map(tr =>
-          tr.id === transactionId ? { ...tr, status: newStatus } : tr
-        )
-      );
-    } catch (err) {
-      console.error(err.response?.data || err);
-      alert('Erro ao atualizar status da transação.');
+  const traduzirStatus = (status) => {
+    switch(status) {
+      case 'pending': return 'Pendente';
+      case 'approved': return 'Aprovado';
+      case 'rejected': return 'Recusado';
+      default: return status;
+    }
+  };
+
+  const traduzirTipo = (type) => {
+    switch(type) {
+      case 'borrow': return 'Empréstimo';
+      default: return type;
     }
   };
 
@@ -41,31 +42,21 @@ export default function SentedRequests({ user }) {
   return (
     <div className="home-page">
       <header>
-        <h2>Pedidos que Recebi para Emprestar</h2>
+        <h2>Pedidos enviados de empréstimo</h2>
         <button onClick={() => navigate('/home')}>Voltar</button>
       </header>
 
       <main>
         {requests.length === 0 ? (
-          <p>Nenhum pedido recebido.</p>
+          <p>Nenhum pedido enviado.</p>
         ) : (
           requests.map(tr => (
             <div key={tr.id} className="book-card">
               <h3>{tr.book?.title || 'Livro desconhecido'}</h3>
-              <p>Livro de: {tr.sender?.name || 'Desconhecido'}</p>
-              <p>Tipo: {tr.type}</p>
-              <p>Status: {tr.status}</p>
-
-              {tr.status === 'pending' && (
-                <div className="action-buttons">
-                  <button onClick={() => handleUpdateStatus(tr.id, 'approved')}>
-                    Confirmar Empréstimo
-                  </button>
-                  <button onClick={() => handleUpdateStatus(tr.id, 'rejected')}>
-                    Recusar Pedido
-                  </button>
-                </div>
-              )}
+              <p>Solicitado de: {tr.sender?.name || 'Desconhecido'}</p>
+              <p>Tipo: {traduzirTipo(tr.type)}</p>
+              <p>Status: {traduzirStatus(tr.status)}</p>
+              
             </div>
           ))
         )}
