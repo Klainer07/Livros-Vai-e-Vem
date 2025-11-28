@@ -10,9 +10,8 @@ export default function HomePage({ user: loggedUser }) {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('available');
-  const [search, setSearch] = useState(''); 
+  const [search, setSearch] = useState('');
 
-  
   useEffect(() => {
     const token = localStorage.getItem('token');
     const userData = loggedUser || JSON.parse(localStorage.getItem('user'));
@@ -66,7 +65,7 @@ export default function HomePage({ user: loggedUser }) {
   const filteredBooks =
     activeTab === 'available'
       ? books.filter(b =>
-          b.status === 'disponível' &&
+          (b.status === 'para emprestar' || b.status === 'para doar') && //apenas esses dois
           b.user.id !== user.id &&
           !transactions.some(t => t.book_id === b.id) &&
           (
@@ -131,20 +130,37 @@ export default function HomePage({ user: loggedUser }) {
             filteredBooks.map(book => (
               <div key={book.id} className="book-card">
                 <h3>{book.title}</h3>
+
+                {book.cover_image ? (
+                  <img
+                    src={book.cover_image}
+                    alt={`Capa de ${book.title}`}
+                    className="book-cover"
+                    onError={(e) => e.currentTarget.src = '/no-cover.png'}
+                  />
+                ) : (
+                  <div className="no-cover">Imagem não disponível</div>
+                )}
+
                 <p>Autor: {book.author}</p>
                 {book.genre && <p>Gênero: {book.genre}</p>}
                 {book.location && <p>Local: {book.location}</p>}
                 <p>Dono: {book.user.name}</p>
+
                 {activeTab === 'mine' && (
-                <>
-                  <p>Status: {book.status === 'disponível' ? 'Disponível' : 'Emprestado'}</p>
-                  <button onClick={() => navigate(`/edit-book/${book.id}`)}>
-                    Editar Livro
-                  </button>
-                </>
+                  <>
+                    <p>Status: {book.status === 'para emprestar' ? 'Para Emprestar' : 'Para Doar'}</p>
+                    <button onClick={() => navigate(`/edit-book/${book.id}`)}>
+                      Editar Livro
+                    </button>
+                  </>
                 )}
+
                 {activeTab === 'available' && (
-                  <button onClick={() => handleBorrow(book)}>Pegar emprestado</button>
+                  <>
+                    <p>Status: {book.status === 'para emprestar' ? 'Para Emprestar' : 'Para Doar'}</p>
+                    <button onClick={() => handleBorrow(book)}>Pegar emprestado</button>
+                  </>
                 )}
               </div>
             ))

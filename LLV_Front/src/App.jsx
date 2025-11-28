@@ -5,6 +5,7 @@ import AddBookPage from './pages/AddBookPage';
 import ReceivedRequests from './pages/ReceivedRequests';
 import SentedRequests from './pages/SentedRequests';
 import EditBookPage from './pages/EditBookPage.jsx';
+import ChatPage from './pages/ChatPage'; 
 import { useState, useEffect } from 'react';
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
 
   const handleUserLogin = (userData) => {
     localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('token', userData.token); // se tiver token, precisa do token melhor dizendo
+    localStorage.setItem('token', userData.token);
     setUser(userData);
   };
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="/requests" element={<ReceivedRequests user={user} />} />
         <Route path="/sented-requests" element={<SentedRequests user={user} />} />
         <Route path="/edit-book/:id" element={<EditBookPage />} />
+        <Route path="/chat/:bookId/:senderId/:receiverId" element={<ChatPage user={user} />} />
       </Routes>
     </Router>
   );

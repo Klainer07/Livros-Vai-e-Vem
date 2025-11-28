@@ -3,16 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import '../styles/HomePage.css';
 
-export default function SentedRequests({ user }) {
+export default function SentRequests({ user }) {
   const navigate = useNavigate();
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user?.id) return;
+    if (!user || !user.id) return;
 
     api.get('/transactions')
       .then(res => {
+        
         const sent = res.data.filter(tr => tr.receiver?.id === user.id);
         setRequests(sent);
       })
@@ -21,7 +22,7 @@ export default function SentedRequests({ user }) {
   }, [user]);
 
   const traduzirStatus = (status) => {
-    switch(status) {
+    switch (status) {
       case 'pending': return 'Pendente';
       case 'approved': return 'Aprovado';
       case 'rejected': return 'Recusado';
@@ -29,20 +30,20 @@ export default function SentedRequests({ user }) {
     }
   };
 
-  const traduzirTipo = (type) => {
-    switch(type) {
-      case 'borrow': return 'Empréstimo';
-      default: return type;
-    }
+  
+  const traduzirTipo = (bookStatus) => {
+    if (bookStatus === 'para emprestar' || bookStatus === 'emprestado') return 'Empréstimo';
+    if (bookStatus === 'para doar' || bookStatus === 'doado') return 'Doação';
+    return 'Desconhecido';
   };
 
-  if (!user) return <p>Carregando usuário...</p>;
+  if (!user || !user.id) return <p>Carregando usuário...</p>;
   if (loading) return <p>Carregando transações...</p>;
 
   return (
     <div className="home-page">
       <header>
-        <h2>Pedidos de Empréstimos Enviados</h2>
+        <h2>Meus Pedidos de Empréstimo/Doação</h2>
         <button onClick={() => navigate('/home')}>Voltar</button>
       </header>
 
@@ -52,11 +53,35 @@ export default function SentedRequests({ user }) {
         ) : (
           requests.map(tr => (
             <div key={tr.id} className="book-card">
-              <h3>{tr.book?.title || 'Livro desconhecido'}</h3>
-              <p>Solicitado de: {tr.sender?.name || 'Desconhecido'}</p>
-              <p>Tipo: {traduzirTipo(tr.type)}</p>
-              <p>Status: {traduzirStatus(tr.status)}</p>
+
               
+              {tr.book?.cover_image ? (
+                <img
+                  src={tr.book.cover_image}
+                  alt={`Capa de ${tr.book.title}`}
+                  className="book-cover"
+                  onError={(e) => e.currentTarget.src = '/no-cover.png'}
+                />
+              ) : (
+                <div className="no-cover">Imagem não disponível</div>
+              )}
+
+              <h3>{tr.book?.title || 'Livro desconhecido'}</h3>
+              <p>Dono do livro: {tr.sender?.name || 'Desconhecido'}</p>
+
+              
+              <p>Tipo: {traduzirTipo(tr.book?.status)}</p>
+              <p>Status: {traduzirStatus(tr.status)}</p>
+
+              
+              {tr.status === 'approved' && (
+                <button
+                  className="chat-btn"
+                  onClick={() => navigate(`/chat/${tr.book_id}/${user.id}/${tr.sender.id}`)}
+                >
+                  Abrir Chat
+                </button>
+              )}
             </div>
           ))
         )}

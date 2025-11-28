@@ -15,7 +15,7 @@ class Book extends Model
         'author',
         'genre',
         'condition',
-        'cover_image', // não implementado no momento
+        'cover_image', 
         'status',      
         'location',
         'user_id',     
@@ -40,9 +40,9 @@ class Book extends Model
     }
 
     
-    public function isAvailable(): bool
+    public function isAvailable() 
     {
-        return $this->status === 'disponível';
+        return in_array($this->status, ['para emprestar', 'para doar']);
     }
 
     
